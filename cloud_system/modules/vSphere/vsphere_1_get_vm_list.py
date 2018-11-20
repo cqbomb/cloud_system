@@ -5,15 +5,12 @@
 # 亁颐堂官网www.qytang.com
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
-
-from vc_basic_actions import get_vms, get_token
-from login_info import vcip, username, password
+from vsphere_0_vc_basic_actions import get_vms
+from vsphere_0_login_info import vcip
 
 
 def get_vm_id():
-    token = get_token(vcip, username, password)
-
-    vm_list = get_vms(vcip, token)
+    vm_list = get_vms(vcip)
 
     vm_ids = []
 
