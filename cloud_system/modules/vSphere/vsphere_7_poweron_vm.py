@@ -6,22 +6,19 @@
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
 
-from vsphere_0_vc_basic_actions import get_networks
 from vsphere_0_login_info import vcip
+from vsphere_0_vc_basic_actions import get_vms, poweron_vm
 
 
-def get_network_id():
-    result = get_networks(vcip)
+def poweron_vm_by_vlanid(VLANID):
+    vm_list = get_vms(vcip)
+    for vm in vm_list:
+        if vm['name'] == 'CentOS_' + str(VLANID):
+            vmid = vm['vm']
 
-    vlanid = []
-
-    for x in result['value']:
-        if 'VLAN' in x['name']:
-            vlanid.append(int(x['name'].replace('VLAN', '')))
-
-    return vlanid
+    poweron_vm(vcip, vmid)
 
 
 if __name__ == "__main__":
-    print(get_network_id())
+    poweron_vm_by_vlanid(58)
 
