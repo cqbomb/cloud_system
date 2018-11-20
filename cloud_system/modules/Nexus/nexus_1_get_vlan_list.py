@@ -6,11 +6,9 @@
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
 
-from nexus_0_login_info import username, password, my_headers
-import requests
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+from nexus_0_login_info import my_headers, username, password
 from requests.auth import HTTPBasicAuth
+import requests
 
 
 def nexus_get_vlan_lists(ip):
@@ -36,5 +34,5 @@ def nexus_get_vlan_lists(ip):
 
 
 if __name__ == "__main__":
-    print(nexus_get_vlan_lists('192.168.1.103'))
+    print(nexus_get_vlan_lists('192.168.1.101'))
 

@@ -6,8 +6,20 @@
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
 
+import requests
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 username = "admin"
 password = "Cisc0123"
 
 my_headers = {"content-type": "application/json-rpc"}
+
+
+def get_session(ip):
+    client = requests.session()
+    login_url = 'http://' + ip + '/api/aaaLogin.json'
+    name_pwd = {'aaaUser': {'attributes': {'name': username, 'pwd': password}}}
+    client.post(login_url, json=name_pwd, headers=my_headers, verify=False)
+    return client
 
