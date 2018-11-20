@@ -26,7 +26,7 @@ def poweron_vm(vcip, vmid):
     r = vc_session.post(url)
     try:
         return r.json()
-    except Exception as e:
+    except Exception:
         return 'vm has power on'
 
 
@@ -35,7 +35,7 @@ def poweroff_vm(vcip, vmid):
     r = vc_session.post(url)
     try:
         return r.json()
-    except Exception as e:
+    except Exception:
         return 'vm has power off'
 
 
@@ -55,97 +55,90 @@ def get_networks(vcip):
     url = 'https://' + vcip + '/rest/vcenter/network'
     r = vc_session.get(url)
     return r.json()
-#
-#
-# def update_vm_nic(vcip, token, vmid, nic, network_name):
-#     headers = {'vmware-api-session-id': token, 'Content-Type': 'application/json'}
-#     network_nic_json = {
-#         "spec": {
-#             "backing": {
-#                 "type": "STANDARD_PORTGROUP",
-#                 "network": network_name
-#             },
-#         }
-#     }
-#     url = 'https://' + vcip + '/rest/vcenter/vm/' + vmid + '/hardware/ethernet/' + nic
-#     r = http.request('PATCH', url, headers=headers, body=json.dumps(network_nic_json))
-#     return r.data
-#
-#
-# def get_hosts(vcip, token):
-#     headers = {'vmware-api-session-id': token}
-#     url = 'https://' + vcip + '/rest/vcenter/host'
-#     r = http.request('GET', url, headers=headers)
-#     return json.loads(r.data.decode())
-#
-#
-# def get_datastores(vcip, token):
-#     headers = {'vmware-api-session-id': token}
-#     url = 'https://' + vcip + '/rest/vcenter/datastore'
-#     r = http.request('GET', url, headers=headers)
-#     return json.loads(r.data.decode())
-#
-#
-# def get_folders(vcip, token):
-#     headers = {'vmware-api-session-id': token}
-#     url = 'https://' + vcip + '/rest/vcenter/folder'
-#     r = http.request('GET', url, headers=headers)
-#     return json.loads(r.data.decode())
-#
-#
-# def create_vm(vcip, token, vmname):
-#     headers = {'vmware-api-session-id': token, 'Content-Type': 'application/json'}
-#     vm_json = {
-#         "spec": {
-#             "placement": {
-#                 "folder": "group-v65",
-#                 "host": "host-28",
-#                 "datastore": "datastore-29"
-#             },
-#             "name": vmname,
-#             "guest_OS": "RHEL_7_64",
-#             "memory": {
-#                 "hot_add_enabled": True,
-#                 "size_MiB": 1024
-#             },
-#             "cpu": {
-#                 "count": 1,
-#                 "hot_add_enabled": True,
-#                 "hot_remove_enabled": True,
-#                 "cores_per_socket": 1
-#             }
-#         }
-#     }
-#     url = 'https://' + vcip + '/rest/vcenter/vm/'
-#     r = http.request('POST', url, headers=headers, body=json.dumps(vm_json))
-#     return r.data
-#
-#
-# def delete_vm(vcip, token, vmid):
-#     headers = {'vmware-api-session-id': token}
-#     url = 'https://' + vcip + '/rest/vcenter/vm/' + vmid
-#     r = http.request('DELETE', url, headers=headers)
-#     return r.data
-#
-#
-# def add_vm_nic(vcip, token, vmid, network_name):
-#     headers = {'vmware-api-session-id': token, 'Content-Type': 'application/json'}
-#     add_nic_json = {
-#         "spec": {
-#             "backing": {
-#                 "type": "STANDARD_PORTGROUP",
-#                 "network": network_name
-#             },
-#             "allow_guest_control": True,
-#             "mac_type": "ASSIGNED",
-#             "wake_on_lan_enabled": True,
-#             "start_connected": True,
-#             "type": "VMXNET3"
-#         }
-#     }
-#     url = 'https://' + vcip + '/rest/vcenter/vm/' + vmid + '/hardware/ethernet'
-#     r = http.request('POST', url, headers=headers, body=json.dumps(add_nic_json))
-#     return r.data
+
+
+def update_vm_nic(vcip, vmid, nic, network_name):
+    network_nic_json = {
+        "spec": {
+            "backing": {
+                "type": "STANDARD_PORTGROUP",
+                "network": network_name
+            },
+        }
+    }
+    url = 'https://' + vcip + '/rest/vcenter/vm/' + vmid + '/hardware/ethernet/' + nic
+    r = vc_session.patch(url, json=network_nic_json)
+    return r.text
+
+
+def get_hosts(vcip):
+    url = 'https://' + vcip + '/rest/vcenter/host'
+    r = vc_session.get(url)
+    return r.json()
+
+
+def get_datastores(vcip):
+    url = 'https://' + vcip + '/rest/vcenter/datastore'
+    r = vc_session.get(url)
+    return r.json()
+
+
+def get_folders(vcip):
+    url = 'https://' + vcip + '/rest/vcenter/folder'
+    r = vc_session.get(url)
+    return r.json()
+
+
+def create_vm(vcip, vmname):
+    vm_json = {
+        "spec": {
+            "placement": {
+                "folder": "group-v65",
+                "host": "host-28",
+                "datastore": "datastore-29"
+            },
+            "name": vmname,
+            "guest_OS": "RHEL_7_64",
+            "memory": {
+                "hot_add_enabled": True,
+                "size_MiB": 1024
+            },
+            "cpu": {
+                "count": 1,
+                "hot_add_enabled": True,
+                "hot_remove_enabled": True,
+                "cores_per_socket": 1
+            }
+        }
+    }
+    url = 'https://' + vcip + '/rest/vcenter/vm/'
+    r = vc_session.post(url, json=vm_json)
+    return r.json()
+
+
+def delete_vm(vcip, vmid):
+    url = 'https://' + vcip + '/rest/vcenter/vm/' + vmid
+    r = vc_session.delete(url)
+    return r.text
+
+
+def add_vm_nic(vcip, vmid, network_name):
+    add_nic_json = {
+        "spec": {
+            "backing": {
+                "type": "STANDARD_PORTGROUP",
+                "network": network_name
+            },
+            "allow_guest_control": True,
+            "mac_type": "ASSIGNED",
+            "wake_on_lan_enabled": True,
+            "start_connected": True,
+            "type": "VMXNET3"
+        }
+    }
+    url = 'https://' + vcip + '/rest/vcenter/vm/' + vmid + '/hardware/ethernet'
+    r = vc_session.post(url, json=add_nic_json)
+    return r.text
 
 
 if __name__ == '__main__':
@@ -156,10 +149,10 @@ if __name__ == '__main__':
     print(get_networks(vcip))
     print(get_vm_nics(vcip, 'vm-427'))
     print(get_vm_nic_detail(vcip, 'vm-427', '4000'))
-    # print(update_vm_nic(vcip,token,'vm-32','4000','network-68'))
-    # print(get_hosts(vcip,token))
-    # print(get_datastores(vcip, token))
-    # print(get_folders(vcip,token))
-    # print(create_vm(vcip,token,'qytang_newvm'))
-    # print(delete_vm(vcip,token,"vm-72"))
-    # print(add_vm_nic(vcip,token,'vm-72','network-30'))
+    print(update_vm_nic(vcip, 'vm-427', '4000', 'network-414'))
+    print(get_hosts(vcip))
+    print(get_datastores(vcip))
+    print(get_folders(vcip))
+    # print(create_vm(vcip, 'qytang_newvm'))
+    # print(delete_vm(vcip, "vm-433"))
+    print(add_vm_nic(vcip, 'vm-434', 'network-414'))
