@@ -9,7 +9,7 @@
 from nexus_0_login_info import get_session, my_headers
 
 
-def add_vlan(ip, vlanid):
+def add_vlan(vlanid, ip):
     nxos_api_url = "https://" + ip + "/api/mo/sys/bd.json"
 
     payload = {
@@ -30,5 +30,5 @@ def add_vlan(ip, vlanid):
 
 
 if __name__ == "__main__":
-    add_vlan('192.168.1.101', 124)
+    add_vlan(124, '192.168.1.101')
 
