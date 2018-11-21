@@ -25,7 +25,7 @@ SECRET_KEY = '3mlxp*0uk0+o#2y5%$#rx29b8j&tc2s-7$r*b+guz8q2#vv8&6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.16.1.10']
+ALLOWED_HOSTS = ['172.16.1.10', 'cloud.qytang.com']
 
 
 # Application definition
@@ -117,5 +117,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 STATIC_URL = '/static/'
