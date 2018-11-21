@@ -5,7 +5,7 @@
 # 亁颐堂官网www.qytang.com
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
-from nexus_0_login_info import get_session, my_headers, username, password
+from nexus_0_login_info import get_session, my_headers, my_headers_rpc, username, password
 from requests.auth import HTTPBasicAuth
 import requests
 
@@ -41,7 +41,7 @@ def config_vxlan_nve(vlanid, ip):
         {"jsonrpc": "2.0", "method": "cli",
          "params": {"cmd": "member vni 100" + str(vlanid) + " mcast-group 225.0.0." + str(vlanid), "version": 1}, "id": 3},
     ]
-    requests.post(nxos_rpc_url, headers=my_headers, auth=HTTPBasicAuth(username, password), json=payload, verify=False)
+    requests.post(nxos_rpc_url, headers=my_headers_rpc, auth=HTTPBasicAuth(username, password), json=payload, verify=False)
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
 
-from nexus_0_login_info import my_headers, username, password
+from nexus_0_login_info import my_headers_rpc, username, password
 from requests.auth import HTTPBasicAuth
 import requests
 
@@ -17,7 +17,7 @@ def nexus_get_vlan_lists(ip):
     ]
     request_url = "https://" + ip + "/ins"
 
-    r = requests.post(request_url, headers=my_headers, auth=HTTPBasicAuth(username, password), json=payload, verify=False)
+    r = requests.post(request_url, headers=my_headers_rpc, auth=HTTPBasicAuth(username, password), json=payload, verify=False)
 
     response = r.json()
     vlan_response = response['result']['body']['TABLE_vlanbriefxbrief']['ROW_vlanbriefxbrief']

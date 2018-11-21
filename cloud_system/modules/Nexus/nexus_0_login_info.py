@@ -13,7 +13,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 username = "admin"
 password = "Cisc0123"
 
-my_headers = {"content-type": "application/json-rpc"}
+my_headers_rpc = {"content-type": "application/json-rpc"}
+my_headers = {"content-type": "application/json"}
 
 
 def get_session(ip):
