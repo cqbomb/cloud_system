@@ -34,5 +34,5 @@ def vsphere_all_auto(temp_no, vlanid):
 
 
 if __name__ == "__main__":
-    vsphere_all_auto(1, 91)
+    vsphere_all_auto(1, 99)
 
