@@ -10,8 +10,8 @@ class Vmdb(models.Model):
     vm_nics = models.IntegerField(default=1, blank=False)
     vm_nics_speed_M = models.IntegerField(default=1, blank=True)
     vm_disk_space_G = models.IntegerField(default=1, blank=True)
-    vm_ip = models.GenericIPAddressField()
-    vm_global_ip = models.GenericIPAddressField()
+    vm_ip = models.GenericIPAddressField(default='1.1.1.1')
+    vm_global_ip = models.GenericIPAddressField(default='1.1.1.1')
     vm_status = models.CharField(max_length=100, blank=True)
     vm_webconsole_url = models.URLField(blank=True)
 

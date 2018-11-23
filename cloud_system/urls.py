@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from views import index
+from views import index, qyt_forms
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('subscribevm/', qyt_forms.subscribevm),
+    path('myvms/', qyt_forms.myvms),
     path('', index.index)
 ]
