@@ -39,6 +39,7 @@ def qyt_cloud_all_auto(cpu_cores, mem):
     config_server(vlanid, dhcp_server_ip)
     nexus_all_auto(vlanid)
     asa_all_auto(vlanid, ip)
+    return vlanid
 
 
 if __name__ == "__main__":

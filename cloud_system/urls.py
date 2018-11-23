@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from views import index, qyt_forms
+from views import index, qyt_forms, qyt_webconsole
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('subscribevm/', qyt_forms.subscribevm),
+    path('webconsole/<str:name>/', qyt_webconsole.webconsole),
     path('myvms/', qyt_forms.myvms),
     path('', index.index)
 ]
