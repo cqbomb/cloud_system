@@ -15,7 +15,7 @@
 {% block body %}
     <div class="container-fluid">
         <br><h2 style="color: #666666">我的虚拟机</h2><br>
-    {# 创建显示学员信息的Table,注意id="myTable", 后续DataTable JavaScript就对这个ID的Table进行渲染优化 #}
+    {# 创建显示虚拟机信息的Table,注意id="myTable", 后续DataTable JavaScript就对这个ID的Table进行渲染优化 #}
     <table class="table table-bordered" id="myTable">
       <thead class="thead-dark">
         <tr>
@@ -37,7 +37,7 @@
       <tbody id ="myTable">
         {% for vm in vms_list %}
         <tr>
-          {# 通过forloop.counter来显示行号,请注意这个不是学员唯一ID #}
+          {# 通过forloop.counter来显示行号 #}
           <th scope="row">{{ forloop.counter }}</th>
           <td>{{ vm.name }}</td>
           <td>{{ vm.status }}</td>
@@ -51,18 +51,13 @@
           <td>{{ vm.global_ip }}</td>
           <td>{{ vm.ip }}</td>
           <td><a href="{{ vm.webconsole_url }}">访问控制台</a></td>
-          {# 添加删除和编辑按钮 #}
-          {# href嵌入传入的删除和编辑的超链接 #}
-          {# onclick="return confirmAct() 用于在删除对象之前显示确认删除的警告信息 #}
-          {# data-toggle="tooltip" data-placement="top" title="删除此学员信息" 用于显示按钮的提示信息 #}
-          {# class="badge badge-danger" class="badge badge-success" bootstrap渲染按钮的类型 #}
         </tr>
         {% endfor %}
       </tbody>
     </table>
     </div>
 
-    {# DataTable渲染显示客户信息的Table #}
+    {# DataTable渲染显示虚拟机信息的Table #}
     {# 需要加载如下的CSS和JS #}
     {# <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> #}
     {# <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> #}
@@ -91,18 +86,5 @@
             table.row('.selected').remove().draw( false );
         } );
     } );
-    </script>
-    {# 提示删除确认警告的JavaScript #}
-    <script type="text/javascript" language="javascript">
-    <!--
-    function confirmAct()
-    {
-        if(confirm('确定要执行此删除操作吗?'))
-        {
-            return true;
-        }
-        return false;
-    }
-    //-->
     </script>
 {% endblock body %}

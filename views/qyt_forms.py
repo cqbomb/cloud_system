@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import permission_required
 def subscribevm(request):
     if request.method == 'POST':
         form = VmForm(request.POST)
-        # 如果请求为POST,并且Form校验通过,把新添加的学员信息写入数据库
+        # 如果请求为POST,并且Form校验通过,把新添加的虚拟机信息写入数据库
         if form.is_valid():
             s1 = Vmdb(vm_cpu_cores=request.POST.get('cpu_cores'),
                       vm_mem_G=request.POST.get('mem_G'),
@@ -24,7 +24,7 @@ def subscribevm(request):
                       vm_nics=request.POST.get('nics'),
                       vm_nics_speed_M=request.POST.get('nics_speed_M'),)
             s1.save()
-            # 写入成功后,重定向返回展示所有学员信息的页面
+            # 写入成功后,重定向返回展示所有虚拟机信息的页面
             return HttpResponseRedirect('/myvms/')
         else:  # 如果Form校验失败,返回客户在Form中输入的内容和报错信息
             # 如果检查到错误,会添加错误内容到form内,例如:<ul class="errorlist"><li>QQ号码已经存在</li></ul>
@@ -37,10 +37,10 @@ def subscribevm(request):
 def myvms(request):
     # 查询整个数据库的信息 object.all()
     result = Vmdb.objects.all()
-    # 最终得到学员清单students_list,清单内部是每一个学员信息的字典
+    # 最终得到虚拟机清单vms_list,清单内部是每一个虚拟机信息的字典
     vms_list = []
     for x in result:
-        # 产生学员信息的字典
+        # 产生虚拟机信息的字典
         vms_dict = {}
 
         vms_dict['name'] = x.vm_name
