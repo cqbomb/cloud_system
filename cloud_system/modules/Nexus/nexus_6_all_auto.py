@@ -5,11 +5,11 @@
 # 亁颐堂官网www.qytang.com
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
-from nexus_1_get_vlan_list import nexus_get_vlan_lists
-from nexus_2_create_vlan import add_vlan
-from nexus_3_create_config_vxlan import create_vxlan, config_vxlan_nve
-from nexus_4_config_dhcp_relay import config_dhcp_relay_server
-from nexus_5_config_svi import create_svi, config_svi_ip_address
+from cloud_system.modules.Nexus.nexus_1_get_vlan_list import nexus_get_vlan_lists
+from cloud_system.modules.Nexus.nexus_2_create_vlan import add_vlan
+from cloud_system.modules.Nexus.nexus_3_create_config_vxlan import create_vxlan, config_vxlan_nve
+from cloud_system.modules.Nexus.nexus_4_config_dhcp_relay import config_dhcp_relay_server
+from cloud_system.modules.Nexus.nexus_5_config_svi import create_svi, config_svi_ip_address
 nxos1_ip = '192.168.1.101'
 nxos3_ip = '192.168.1.103'
 dhcp_ip_address = "172.16.254.254"

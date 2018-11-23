@@ -5,7 +5,7 @@
 # 亁颐堂官网www.qytang.com
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
-from asa_0_login_info import ip, my_headers, auth_header
+from cloud_system.modules.ASA.asa_0_login_info import ip, my_headers, auth_header
 import requests
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)

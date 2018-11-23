@@ -6,8 +6,8 @@
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
 
-from vsphere_0_login_info import vcip
-from vsphere_0_vc_basic_actions import get_vms, poweron_vm
+from cloud_system.modules.vSphere.vsphere_0_login_info import vcip
+from cloud_system.modules.vSphere.vsphere_0_vc_basic_actions import get_vms, poweron_vm
 
 
 def poweron_vm_by_vlanid(VLANID):

@@ -6,7 +6,7 @@
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
 
-from vsphere_0_login_info import vc_session, vcip
+from cloud_system.modules.vSphere.vsphere_0_login_info import vc_session, vcip
 
 
 def get_vms(vcip):

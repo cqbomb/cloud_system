@@ -6,7 +6,7 @@
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
 
-from nexus_0_login_info import get_session, my_headers
+from cloud_system.modules.Nexus.nexus_0_login_info import get_session, my_headers
 
 dhcp_ip_address = "172.16.254.254"
 

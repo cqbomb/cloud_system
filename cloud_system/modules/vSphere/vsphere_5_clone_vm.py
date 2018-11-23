@@ -7,7 +7,7 @@
 # https://ke.qq.com/course/271956?tuin=24199d8a
 
 from pyVmomi import vim
-from pyVim.connect import SmartConnect,SmartConnectNoSSL, Disconnect
+from pyVim.connect import SmartConnect, SmartConnectNoSSL, Disconnect
 import atexit
 
 
