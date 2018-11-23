@@ -50,7 +50,7 @@
           <td>{{ vm.nics_speed_M }}</td>
           <td>{{ vm.global_ip }}</td>
           <td>{{ vm.ip }}</td>
-          <td>{{ vm.webconsole_url }}</td>
+          <td><a href="{{ vm.webconsole_url }}">访问控制台</a></td>
           {# 添加删除和编辑按钮 #}
           {# href嵌入传入的删除和编辑的超链接 #}
           {# onclick="return confirmAct() 用于在删除对象之前显示确认删除的警告信息 #}
