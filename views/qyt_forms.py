@@ -11,6 +11,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from qytcloud.forms import VmForm
 from django.contrib.auth.decorators import permission_required
+from cloud_system.modules.vSphere.vsphere_1_get_vm_list import get_vm_id
+from cloud_system.modules.vSphere.vsphere_2_get_portgroup_list import get_network_id
+from cloud_system.modules.Cloud_AUTO.ALL_AUTO import qyt_cloud_all_auto
+from multiprocessing.pool import ThreadPool
+from random import randint
+
+pool = ThreadPool(processes=5)
 
 
 def subscribevm(request):
@@ -18,7 +25,23 @@ def subscribevm(request):
         form = VmForm(request.POST)
         # 如果请求为POST,并且Form校验通过,把新添加的虚拟机信息写入数据库
         if form.is_valid():
-            s1 = Vmdb(vm_cpu_cores=request.POST.get('cpu_cores'),
+            while True:
+                vlanid = randint(10, 100)
+                vmid_list = get_vm_id()
+                netid_list = get_network_id()
+                if vlanid in vmid_list:
+                    continue
+                if vlanid in netid_list:
+                    continue
+                break
+
+            pool.apply_async(qyt_cloud_all_auto, args=(int(request.POST.get('cpu_cores')), int(request.POST.get('mem_G')), vlanid))
+            # qyt_cloud_all_auto(int(request.POST.get('cpu_cores')), int(request.POST.get('mem_G')), vlanid)
+            s1 = Vmdb(vm_name='CentOS_' + str(vlanid),
+                      vm_global_ip="202.100.1." + str(vlanid),
+                      vm_ip="172.16." + str(vlanid) + ".100",
+                      vm_webconsole_url="/webconsole/CentOS_" + str(vlanid),
+                      vm_cpu_cores=request.POST.get('cpu_cores'),
                       vm_mem_G=request.POST.get('mem_G'),
                       vm_disk_space_G=request.POST.get('disk_space_G'),
                       vm_nics=request.POST.get('nics'),
