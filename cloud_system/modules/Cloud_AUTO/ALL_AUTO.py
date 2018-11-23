@@ -12,6 +12,7 @@ from cloud_system.modules.Nexus.nexus_6_all_auto import nexus_all_auto
 from cloud_system.modules.vSphere.vsphere_1_get_vm_list import get_vm_id
 from cloud_system.modules.vSphere.vsphere_2_get_portgroup_list import get_network_id
 from cloud_system.modules.vSphere.vsphere_8_all_auto import vsphere_all_auto
+from random import randint
 
 
 def qyt_cloud_all_auto(cpu_cores, mem):
@@ -25,7 +26,7 @@ def qyt_cloud_all_auto(cpu_cores, mem):
         temp_no = 4
 
     while True:
-        vlanid = randint(10,100)
+        vlanid = randint(10, 100)
         vmid_list = get_vm_id()
         netid_list = get_network_id()
         if vlanid in vmid_list:
