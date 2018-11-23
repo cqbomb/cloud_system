@@ -40,7 +40,15 @@
           {# 通过forloop.counter来显示行号 #}
           <th scope="row">{{ forloop.counter }}</th>
           <td>{{ vm.name }}</td>
-          <td>{{ vm.status }}</td>
+          {% if vm.status == 'POWERED_ON' %}
+              <td style="background-color:green"><strong>{{ vm.status }}</strong></td>
+          {% elif vm.status == 'POWERED_OFF' %}
+            <td style="background-color:yellow"><strong>{{ vm.status }}</strong></td>
+          {% elif vm.status == 'UNKOWN' %}
+            <td style="background-color:red"><strong>{{ vm.status }}</strong></td>
+          {% else %}
+            <td>{{ vm.status }}</td>
+          {% endif %}
           <td>{{ vm.summary }}</td>
           <td>{{ vm.owner }}</td>
           <td>{{ vm.cpu_cores }}</td>
