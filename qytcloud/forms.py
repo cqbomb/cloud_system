@@ -56,3 +56,4 @@ class UserForm(forms.Form):
                                required=True,
                                widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "密码"})
                                )
+

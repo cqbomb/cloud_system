@@ -4,6 +4,13 @@
     <list>
       <list>
         <remote-mappings server-id="python@efd79057-0757-4a5c-93c0-8e1394455ce0" />
+        <remote-mappings server-id="python@sftp://root@172.16.1.10:22/usr/local/bin/python3.6">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$" remote-root="/cloud" />
+            </list>
+          </settings>
+        </remote-mappings>
       </list>
     </list>
   </component>

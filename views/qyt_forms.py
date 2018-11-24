@@ -16,17 +16,19 @@ from cloud_system.modules.vSphere.vsphere_2_get_portgroup_list import get_networ
 from cloud_system.modules.Cloud_AUTO.ALL_AUTO import qyt_cloud_all_auto
 from multiprocessing.pool import ThreadPool
 from random import randint
+from django.contrib.auth.decorators import login_required
 
 pool = ThreadPool(processes=5)
 
 
+@login_required()
 def subscribevm(request):
     if request.method == 'POST':
         form = VmForm(request.POST)
         # 如果请求为POST,并且Form校验通过,把新添加的虚拟机信息写入数据库
         if form.is_valid():
             while True:
-                vlanid = randint(10, 100)
+                vlanid = randint(10, 99)
                 vmid_list = get_vm_id()
                 netid_list = get_network_id()
                 if vlanid in vmid_list:
@@ -57,6 +59,7 @@ def subscribevm(request):
         return render(request, 'subscribevm.html', {'form': form})
 
 
+@login_required()
 def myvms(request):
     # 查询整个数据库的信息 object.all()
     result = Vmdb.objects.all()
