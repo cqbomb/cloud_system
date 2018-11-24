@@ -7,6 +7,7 @@
 # https://ke.qq.com/course/271956?tuin=24199d8a
 
 from cloud_system.modules.vSphere.vsphere_0_login_info import vc_session, vcip
+# from qytcloud.models import Vmdb
 
 
 def get_vms(vcip):
@@ -140,6 +141,12 @@ def delete_vm(vcip, vmid):
     return r.text
 
 
+def delete_vm_by_name(vcip, vmname):
+    # Vmdb.objects.get(vm_name=vmname).delete()
+    poweroff_vm(vcip, get_vms_id_by_name(vcip, vmname))
+    delete_vm(vcip, get_vms_id_by_name(vcip, vmname))
+
+
 def add_vm_nic(vcip, vmid, network_name):
     add_nic_json = {
         "spec": {
@@ -163,7 +170,7 @@ if __name__ == '__main__':
     # print(get_vms(vcip))
     # print(get_vms_name_id(vcip))
     # print(get_vms_id_by_name(vcip, "CentOS_50"))
-    poweroff_vm_by_name(vcip, "CentOS_50")
+    # poweroff_vm_by_name(vcip, "CentOS_50")
     # poweron_vm_by_name(vcip, "CentOS_50")
     # print(get_vm_power_status(vcip, 'vm-427'))
     # print(poweron_vm(vcip, 'vm-427'))
@@ -176,5 +183,6 @@ if __name__ == '__main__':
     # print(get_datastores(vcip))
     # print(get_folders(vcip))
     # # print(create_vm(vcip, 'qytang_newvm'))
-    # # print(delete_vm(vcip, "vm-433"))
+    # print(delete_vm(vcip, "vm-463"))
+    print(delete_vm_by_name(vcip, 'CentOS_42'))
     # print(add_vm_nic(vcip, 'vm-434', 'network-414'))

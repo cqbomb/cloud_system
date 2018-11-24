@@ -32,6 +32,7 @@
           <th scope="col">全局IP地址</th>
           <th scope="col">本地IP地址</th>
           <th scope="col">WebConsole</th>
+          <th scope="col">操作</th>
         </tr>
       </thead>
       <tbody id ="myTable">
@@ -59,6 +60,7 @@
           <td>{{ vm.global_ip }}</td>
           <td>{{ vm.ip }}</td>
           <td><a href="{{ vm.webconsole_url }}">访问控制台</a></td>
+          <td style="background-color:red"><strong><a href="/delete/{{ vm.name }}" onclick="return DeleteconfirmAct();" data-toggle="tooltip" data-placement="top" title="删除虚拟机">删除</a></strong></td>
         </tr>
         {% endfor %}
       </tbody>
@@ -112,6 +114,17 @@
     function PoweroffconfirmAct()
     {
         if(confirm('确定要关闭虚拟机电源吗?'))
+        {
+            return true;
+        }
+        return false;
+    }
+    //-->
+    </script>    <script type="text/javascript" language="javascript">
+    <!--
+    function DeleteconfirmAct()
+    {
+        if(confirm('确定要删除此虚拟机吗?'))
         {
             return true;
         }
