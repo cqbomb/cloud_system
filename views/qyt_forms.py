@@ -28,7 +28,7 @@ def subscribevm(request):
         # 如果请求为POST,并且Form校验通过,把新添加的虚拟机信息写入数据库
         if form.is_valid():
             while True:
-                vlanid = randint(10, 99)
+                vlanid = randint(10, 100)
                 vmid_list = get_vm_id()
                 netid_list = get_network_id()
                 if vlanid in vmid_list:
