@@ -19,7 +19,18 @@ def create_pg(vlan_no):
     sshclient_execmd(hostname, port, username, password, execmd)
 
 
+def remove_pg(name):
+    hostname = "172.16.1.201"
+    port = 22
+    username = "root"
+    password = "Cisc0123"
+    execmd = "esxcli network vswitch standard portgroup remove -p " + name + " -v vSwitch1"
+
+    sshclient_execmd(hostname, port, username, password, execmd)
+
+
 if __name__ == "__main__":
-    create_pg(178)
+    # create_pg(178)
+    remove_pg('VLAN27')
 
 

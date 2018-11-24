@@ -5,7 +5,7 @@
 # 亁颐堂官网www.qytang.com
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
-from cloud_system.modules.vSphere.vsphere_3_create_portgroup import create_pg
+from cloud_system.modules.vSphere.vsphere_3_create_and_remove_portgroup import create_pg
 from cloud_system.modules.vSphere.vsphere_4_edit_portgroup_vlanid import edit_pg_vlan_id
 from cloud_system.modules.vSphere.vsphere_5_clone_vm import clone_vm_from_no
 from cloud_system.modules.vSphere.vsphere_6_add_nic_to_vm import add_nic_to_vm
