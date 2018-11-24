@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from views import index, qyt_forms, qyt_webconsole, qyt_login
+from views import index, qyt_forms, qyt_webconsole, qyt_login, qyt_vm_power_control
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +24,7 @@ urlpatterns = [
     path('accounts/logout/', qyt_login.qyt_logout),
     path('webconsole/<str:name>/', qyt_webconsole.webconsole),
     path('myvms/', qyt_forms.myvms),
+    path('poweron/<str:vmname>', qyt_vm_power_control.poweron),
+    path('poweroff/<str:vmname>', qyt_vm_power_control.poweroff),
     path('', index.index)
 ]

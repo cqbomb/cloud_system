@@ -41,11 +41,11 @@
           <th scope="row">{{ forloop.counter }}</th>
           <td>{{ vm.name }}</td>
           {% if vm.status == 'POWERED_ON' %}
-              <td style="background-color:green"><strong>{{ vm.status }}</strong></td>
+              <td style="background-color:lightskyblue"><strong><a href="/poweroff/{{ vm.name }}" onclick="return PoweroffconfirmAct();" data-placement="top" title="关闭虚拟机电源">{{ vm.status }}</a></strong></td>
           {% elif vm.status == 'POWERED_OFF' %}
-            <td style="background-color:yellow"><strong>{{ vm.status }}</strong></td>
+            <td style="background-color:yellow"><strong><a href="/poweron/{{ vm.name }}" onclick="return PoweronconfirmAct();" data-toggle="tooltip" data-placement="top" title="打开虚拟机电源">{{ vm.status }}</a></strong></td>
           {% elif vm.status == 'UNKOWN' %}
-            <td style="background-color:red"><strong>{{ vm.status }}</strong></td>
+            <td style="background-color:gainsboro"><strong>{{ vm.status }}</strong></td>
           {% else %}
             <td>{{ vm.status }}</td>
           {% endif %}
@@ -94,5 +94,29 @@
             table.row('.selected').remove().draw( false );
         } );
     } );
+    </script>
+        <script type="text/javascript" language="javascript">
+    <!--
+    function PoweronconfirmAct()
+    {
+        if(confirm('确定要打开虚拟机电源吗?'))
+        {
+            return true;
+        }
+        return false;
+    }
+    //-->
+    </script>
+    <script type="text/javascript" language="javascript">
+    <!--
+    function PoweroffconfirmAct()
+    {
+        if(confirm('确定要关闭虚拟机电源吗?'))
+        {
+            return true;
+        }
+        return false;
+    }
+    //-->
     </script>
 {% endblock body %}

@@ -15,6 +15,16 @@ def get_vms(vcip):
     return r.json()['value']
 
 
+def get_vms_name_id(vcip):
+    url = 'https://' + vcip + '/rest/vcenter/vm'
+    r = vc_session.get(url)
+    return {x['name']: x['vm'] for x in r.json()['value']}
+
+
+def get_vms_id_by_name(vcip, vmname):
+    return get_vms_name_id(vcip).get(vmname)
+
+
 def get_vm_power_status(vcip, vmid):
     url = 'https://' + vcip + '/rest/vcenter/vm/' + vmid + '/power'
     r = vc_session.get(url)
@@ -30,6 +40,10 @@ def poweron_vm(vcip, vmid):
         return 'vm has power on'
 
 
+def poweron_vm_by_name(vcip, vmname):
+    poweron_vm(vcip, get_vms_id_by_name(vcip, vmname))
+
+
 def poweroff_vm(vcip, vmid):
     url = 'https://' + vcip + '/rest/vcenter/vm/' + vmid + '/power/stop'
     r = vc_session.post(url)
@@ -37,6 +51,10 @@ def poweroff_vm(vcip, vmid):
         return r.json()
     except Exception:
         return 'vm has power off'
+
+
+def poweroff_vm_by_name(vcip, vmname):
+    poweroff_vm(vcip, get_vms_id_by_name(vcip, vmname))
 
 
 def get_vm_nics(vcip, vmid):
@@ -142,17 +160,21 @@ def add_vm_nic(vcip, vmid, network_name):
 
 
 if __name__ == '__main__':
-    print(get_vms(vcip))
-    print(get_vm_power_status(vcip, 'vm-427'))
-    print(poweron_vm(vcip, 'vm-427'))
-    print(poweroff_vm(vcip, 'vm-427'))
-    print(get_networks(vcip))
-    print(get_vm_nics(vcip, 'vm-427'))
-    print(get_vm_nic_detail(vcip, 'vm-427', '4000'))
-    print(update_vm_nic(vcip, 'vm-427', '4000', 'network-414'))
-    print(get_hosts(vcip))
-    print(get_datastores(vcip))
-    print(get_folders(vcip))
-    # print(create_vm(vcip, 'qytang_newvm'))
-    # print(delete_vm(vcip, "vm-433"))
-    print(add_vm_nic(vcip, 'vm-434', 'network-414'))
+    # print(get_vms(vcip))
+    # print(get_vms_name_id(vcip))
+    # print(get_vms_id_by_name(vcip, "CentOS_50"))
+    poweroff_vm_by_name(vcip, "CentOS_50")
+    # poweron_vm_by_name(vcip, "CentOS_50")
+    # print(get_vm_power_status(vcip, 'vm-427'))
+    # print(poweron_vm(vcip, 'vm-427'))
+    # print(poweroff_vm(vcip, 'vm-427'))
+    # print(get_networks(vcip))
+    # print(get_vm_nics(vcip, 'vm-427'))
+    # print(get_vm_nic_detail(vcip, 'vm-427', '4000'))
+    # print(update_vm_nic(vcip, 'vm-427', '4000', 'network-414'))
+    # print(get_hosts(vcip))
+    # print(get_datastores(vcip))
+    # print(get_folders(vcip))
+    # # print(create_vm(vcip, 'qytang_newvm'))
+    # # print(delete_vm(vcip, "vm-433"))
+    # print(add_vm_nic(vcip, 'vm-434', 'network-414'))
