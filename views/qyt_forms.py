@@ -27,6 +27,8 @@ def subscribevm(request):
         form = VmForm(request.POST)
         # 如果请求为POST,并且Form校验通过,把新添加的虚拟机信息写入数据库
         if form.is_valid():
+            owner = request.session.get('username')
+
             while True:
                 vlanid = randint(10, 99)
                 vmid_list = get_vm_id()
@@ -41,6 +43,7 @@ def subscribevm(request):
             # qyt_cloud_all_auto(int(request.POST.get('cpu_cores')), int(request.POST.get('mem_G')), vlanid)
             s1 = Vmdb(vm_name='CentOS_' + str(vlanid),
                       vm_global_ip="202.100.1." + str(vlanid),
+                      vm_owner=owner,
                       vm_ip="172.16." + str(vlanid) + ".100",
                       vm_webconsole_url="/webconsole/CentOS_" + str(vlanid),
                       vm_cpu_cores=request.POST.get('cpu_cores'),
@@ -61,11 +64,17 @@ def subscribevm(request):
 
 @login_required()
 def myvms(request):
-    # 查询整个数据库的信息 object.all()
-    result = Vmdb.objects.all()
+    owner = request.session.get('username')
+    if owner == 'admin':
+        # 查询整个数据库的信息 object.all()
+        result = Vmdb.objects.all()
+    else:
+        result = Vmdb.objects.filter(vm_owner=owner)
     # 最终得到虚拟机清单vms_list,清单内部是每一个虚拟机信息的字典
     vms_list = []
+
     for x in result:
+
         # 产生虚拟机信息的字典
         vms_dict = {}
 

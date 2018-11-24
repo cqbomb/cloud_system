@@ -10,6 +10,7 @@ from django.shortcuts import render
 from qytcloud.forms import UserForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 
 def qyt_login(request):
@@ -20,6 +21,7 @@ def qyt_login(request):
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
             login(request, user)
+            request.session['username'] = username
             next_url = request.GET.get('next', '/')
             return HttpResponseRedirect(next_url)
 
