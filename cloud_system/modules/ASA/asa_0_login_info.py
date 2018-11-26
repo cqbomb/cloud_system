@@ -7,7 +7,7 @@
 # https://ke.qq.com/course/271956?tuin=24199d8a
 from requests.auth import HTTPBasicAuth
 
-username = 'admin'
+username = 'admin' 
 password = 'Cisc0123'
 ip = "192.168.1.104"
 
