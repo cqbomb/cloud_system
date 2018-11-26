@@ -16,6 +16,20 @@ def get_vms(vcip):
     return r.json()['value']
 
 
+def get_vm_cpu(vcip, vmid):
+    # GET / vcenter / vm / {vm} / hardware / memory
+    url = 'https://' + vcip + '/rest/vcenter/vm/' + vmid + '/hardware/cpu/'
+    r = vc_session.get(url)
+    return r.json()
+
+
+def get_vm_mem(vcip, vmid):
+    # GET / vcenter / vm / {vm} / hardware / memory
+    url = 'https://' + vcip + '/rest/vcenter/vm/' + vmid + '/hardware/mem/'
+    r = vc_session.get(url)
+    return r.json()
+
+
 def get_vms_name_id(vcip):
     url = 'https://' + vcip + '/rest/vcenter/vm'
     r = vc_session.get(url)
@@ -167,7 +181,8 @@ def add_vm_nic(vcip, vmid, network_name):
 
 
 if __name__ == '__main__':
-    # print(get_vms(vcip))
+    print(get_vms(vcip))
+    print(get_vm_cpu(vcip, 'vm-515'))
     # print(get_vms_name_id(vcip))
     # print(get_vms_id_by_name(vcip, "CentOS_50"))
     # poweroff_vm_by_name(vcip, "CentOS_50")
@@ -175,7 +190,7 @@ if __name__ == '__main__':
     # print(get_vm_power_status(vcip, 'vm-427'))
     # print(poweron_vm(vcip, 'vm-427'))
     # print(poweroff_vm(vcip, 'vm-427'))
-    print(get_networks(vcip))
+    # print(get_networks(vcip))
     # print(get_vm_nics(vcip, 'vm-427'))
     # print(get_vm_nic_detail(vcip, 'vm-427', '4000'))
     # print(update_vm_nic(vcip, 'vm-427', '4000', 'network-414'))

@@ -15,8 +15,12 @@ def get_vm_id():
     vm_ids = []
 
     for vm in vm_list:
-        if 'CentOS_' in vm['name']:
-            vm_ids.append(int(vm['name'].replace('CentOS_', '')))
+        try:
+            if 'CentOS_' in vm['name']:
+                vm_ids.append(int(vm['name'].replace('CentOS_', '')))
+        except Exception:
+            pass
+
     return vm_ids
 
 
