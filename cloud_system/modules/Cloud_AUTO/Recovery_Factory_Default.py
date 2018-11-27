@@ -12,12 +12,16 @@ from qytcloud.models import Vmdb
 import time
 
 
+# 删除所有的虚拟机与端口组
 def recovery(vcip):
+    # 删除所有的虚拟机,先关机再删除
     for vm in get_vms(vcip):
         poweroff_vm(vcip, vm['vm'])
         delete_vm(vcip, vm['vm'])
+    # 删除所有的Port-Group
     for net in get_networks(vcip)['value']:
         remove_pg(net['name'])
+        # 每次执行都等待一秒
         time.sleep(1)
 
 

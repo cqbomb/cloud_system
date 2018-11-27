@@ -13,6 +13,7 @@ from cloud_system.modules.vSphere.vsphere_8_all_auto import vsphere_all_auto
 
 
 def qyt_cloud_all_auto(cpu_cores, mem, vlanid):
+    # 根据客户输入的CPU和MEM配置,判断模板
     if mem == 1 and cpu_cores == 1:
         temp_no = 1
     elif mem == 2 and cpu_cores == 1:
@@ -22,9 +23,13 @@ def qyt_cloud_all_auto(cpu_cores, mem, vlanid):
     elif mem == 2 and cpu_cores == 2:
         temp_no = 4
 
+    # 完成vSphere的自动化任务,创建虚拟机,Port-Group等等操作
     vsphere_all_auto(temp_no, vlanid)
+    # 在IOS设备上配置DHCP服务器
     config_server(vlanid, dhcp_server_ip)
+    # 完成Nexus交换机上的自动化任务,创建VLAN,VXLAN,SVI,DHCP Relay等等操作
     nexus_all_auto(vlanid)
+    # 完成ASA上的自动化任务,创建OBJ,NAT,ACL等等操作
     asa_all_auto(vlanid, ip)
     return vlanid
 
