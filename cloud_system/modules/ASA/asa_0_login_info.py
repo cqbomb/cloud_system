@@ -6,7 +6,7 @@
 # 教主技术进化论拓展你的技术新边疆
 # https://ke.qq.com/course/271956?tuin=24199d8a
 from requests.auth import HTTPBasicAuth
-
+# test
 username = 'admin'
 password = 'Cisc0123'
 ip = "192.168.1.104"
