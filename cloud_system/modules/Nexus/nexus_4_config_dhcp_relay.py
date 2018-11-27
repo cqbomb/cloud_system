@@ -34,7 +34,7 @@ def enable_dhcp_relay(ip):
 
 
 # 配置DHCP Relay服务器地址
-# 配置不出现在show run
+# 配置不出现在show run!
 # 可以使用show ip dhcp relay查看
 #  Interface        Relay Address     VRF Name
 #  -------------    -------------     --------
