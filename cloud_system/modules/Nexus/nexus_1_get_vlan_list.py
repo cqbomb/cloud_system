@@ -11,6 +11,7 @@ from requests.auth import HTTPBasicAuth
 import requests
 
 
+# 使用JSON RPC执行命令获取结果,注意测试发现JSON RPC无法使用Session,只能使用HTTP基本认证
 def nexus_get_vlan_lists(ip):
     payload = [
         {"jsonrpc": "2.0", "method": "cli", "params": {"cmd": "show vlan brief", "version": 1}, "id": 1}

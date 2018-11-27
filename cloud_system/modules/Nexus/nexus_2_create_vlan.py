@@ -9,6 +9,7 @@
 from cloud_system.modules.Nexus.nexus_0_login_info import get_session, my_headers
 
 
+# 使用REST API创建VLAN
 def add_vlan(vlanid, ip):
     nxos_api_url = "https://" + ip + "/api/mo/sys/bd.json"
 
