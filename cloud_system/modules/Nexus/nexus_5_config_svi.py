@@ -8,6 +8,7 @@
 from cloud_system.modules.Nexus.nexus_0_login_info import get_session, my_headers
 
 
+# 创建SVI,并no shutdown
 def create_svi(vlanid, ip):
     session = get_session(ip)
     nxos_api_url = "https://" + ip + "/api/node/mo/sys/intf/svi-[vlan" + str(vlanid) + "].json"
@@ -24,6 +25,7 @@ def create_svi(vlanid, ip):
     session.post(nxos_api_url, headers=my_headers, json=payload, verify=False)
 
 
+# 配置SVI IP地址
 def config_svi_ip_address(vlanid, ip):
     session = get_session(ip)
     nxos_api_url = "https://" + ip + "/api/mo/sys.json"
