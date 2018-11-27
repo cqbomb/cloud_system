@@ -10,6 +10,10 @@ from requests.auth import HTTPBasicAuth
 import requests
 
 
+# VLAN关联VXLAN
+# 具体配置如下:
+# vlan 123
+#   vn-segment 100123
 def create_vxlan(vlanid, ip):
     session = get_session(ip)
 
@@ -33,6 +37,10 @@ def create_vxlan(vlanid, ip):
     session.post(nxos_api_url, headers=my_headers, json=payload, verify=False)
 
 
+# interface nve下关联VXLAN,并且配置组播地址
+# 具体配置如下:
+# interface nve1
+#   member vni 100123 mcast-group 225.0.0.123
 def config_vxlan_nve(vlanid, ip):
     nxos_rpc_url = "https://" + ip + "/ins"
     payload = [
