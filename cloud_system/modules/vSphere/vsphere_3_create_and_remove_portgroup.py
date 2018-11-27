@@ -9,6 +9,7 @@
 from cloud_system.modules.vSphere.vsphere_0_sshclient import sshclient_execmd
 
 
+# 使用paramiko SSH登录到ESXi创建标准交换机端口组
 def create_pg(vlan_no):
     hostname = "172.16.1.201"
     port = 22
@@ -19,6 +20,7 @@ def create_pg(vlan_no):
     sshclient_execmd(hostname, port, username, password, execmd)
 
 
+# 使用paramiko SSH登录到ESXi删除标准交换机端口组
 def remove_pg(name):
     hostname = "172.16.1.201"
     port = 22

@@ -10,6 +10,7 @@ from cloud_system.modules.vSphere.vsphere_0_vc_basic_actions import get_networks
 from cloud_system.modules.vSphere.vsphere_0_login_info import vcip
 
 
+# 根据VLANID获取网络的唯一ID
 def get_net_id(no):
     result = get_networks(vcip)
 
@@ -18,6 +19,7 @@ def get_net_id(no):
             return x['network']
 
 
+# 根据VLANID获取虚拟机的唯一ID
 def get_vmhost_id(no):
     vm_list = get_vms(vcip)
 
@@ -26,6 +28,7 @@ def get_vmhost_id(no):
             return x['vm']
 
 
+# 为虚拟机添加网络
 def add_nic_to_vm(no):
     # print('网络唯一ID:' + str(net_id))
     net_id = get_net_id(no)
@@ -38,7 +41,7 @@ def add_nic_to_vm(no):
 
 
 if __name__ == "__main__":
-    print(get_net_id(58))
+    print(get_net_id(14))
     print(get_vmhost_id(58))
     add_nic_to_vm(58)
 

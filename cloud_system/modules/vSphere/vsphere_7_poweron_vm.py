@@ -10,6 +10,7 @@ from cloud_system.modules.vSphere.vsphere_0_login_info import vcip
 from cloud_system.modules.vSphere.vsphere_0_vc_basic_actions import get_vms, poweron_vm
 
 
+# 打开特性VLANID的虚拟机
 def poweron_vm_by_vlanid(VLANID):
     vm_list = get_vms(vcip)
     for vm in vm_list:

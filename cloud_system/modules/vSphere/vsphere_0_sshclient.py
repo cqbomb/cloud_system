@@ -9,6 +9,7 @@
 import paramiko
 
 
+# 一个执行ESXi CLI命令的客户端脚本
 def sshclient_execmd(hostname, port, username, password, execmd):
     paramiko.util.log_to_file("paramiko.log")
 

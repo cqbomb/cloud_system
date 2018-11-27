@@ -9,13 +9,15 @@ from cloud_system.modules.vSphere.vsphere_0_vc_basic_actions import get_vms
 from cloud_system.modules.vSphere.vsphere_0_login_info import vcip
 
 
+# 获取虚拟机对应的VLANID的清单
+# [14]
 def get_vm_id():
     vm_list = get_vms(vcip)
 
     vm_ids = []
 
     for vm in vm_list:
-        try:
+        try:  # 要防止没有虚拟机,或者名字里边没有CentOS的情况
             if 'CentOS_' in vm['name']:
                 vm_ids.append(int(vm['name'].replace('CentOS_', '')))
         except Exception:

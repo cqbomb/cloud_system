@@ -10,6 +10,8 @@ from cloud_system.modules.vSphere.vsphere_0_vc_basic_actions import get_networks
 from cloud_system.modules.vSphere.vsphere_0_login_info import vcip
 
 
+# 获取端口组对应的VLANID的清单
+# [14]
 def get_network_id():
     result = get_networks(vcip)
 

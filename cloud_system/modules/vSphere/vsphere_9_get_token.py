@@ -12,6 +12,7 @@ from pyVmomi import vim, vmodl
 import sys
 
 
+# 获取WEBCONSOLE的URL
 def get_token_url(vmname):
 
     si = SmartConnectNoSSL(host=vcip, user=username, pwd=password)

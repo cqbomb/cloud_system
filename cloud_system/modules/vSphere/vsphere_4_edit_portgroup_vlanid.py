@@ -9,6 +9,7 @@
 from cloud_system.modules.vSphere.vsphere_0_sshclient import sshclient_execmd
 
 
+# 修改Port-Group的VLAN
 def edit_pg_vlan_id(vlan_no):
     hostname = "172.16.1.201"
     port = 22

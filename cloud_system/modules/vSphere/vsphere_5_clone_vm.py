@@ -11,6 +11,7 @@ from pyVim.connect import SmartConnect, SmartConnectNoSSL, Disconnect
 import atexit
 
 
+# 等待任务结束
 def wait_for_task(task):
     """ wait for a vCenter task to finish """
     task_done = False
@@ -23,6 +24,7 @@ def wait_for_task(task):
             task_done = True
 
 
+# 获取对象信息
 def get_obj(content, vimtype, name):
     """
     Return an object by name, if name is None the
@@ -43,6 +45,7 @@ def get_obj(content, vimtype, name):
     return obj
 
 
+# 克隆虚拟机
 def clone_vm(
         content, template, vm_name, si,
         datacenter_name, vm_folder, datastore_name,
@@ -114,8 +117,9 @@ def clone_vm(
     print("-- The VM has been Cloned --")
 
 
+# 通过模板ID,产生特定VLANID的虚拟机
 def clone_vm_from_no(vm_no, temp_no):
-
+    # 登录vCenter
     si = SmartConnectNoSSL(
          host='172.16.1.200',
          user='administrator@vsphere.local',
@@ -125,7 +129,7 @@ def clone_vm_from_no(vm_no, temp_no):
     atexit.register(Disconnect, si)
     content = si.RetrieveContent()
     template = None
-
+    # 判断克隆模板
     if temp_no == 1:
         template = get_obj(content, [vim.VirtualMachine], 'vm_temp_cpu1_mem1')
 
@@ -137,9 +141,9 @@ def clone_vm_from_no(vm_no, temp_no):
 
     elif temp_no == 4:
         template = get_obj(content, [vim.VirtualMachine], 'vm_temp_cpu2_mem2')
-
+    # 根据VLANID产生虚拟机名字
     vm_name = 'CentOS_'+str(vm_no)
-
+    # 克隆产生虚拟机
     clone_vm(
         content, template, vm_name, si,
         None, 'vm_cloned_from_template',
