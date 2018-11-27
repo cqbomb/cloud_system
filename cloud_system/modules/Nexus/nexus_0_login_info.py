@@ -10,7 +10,7 @@ import requests
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# 登录设备用户名和密码
+# 登录设备用户名和密码1
 username = "admin"
 password = "Cisc0123"
 
