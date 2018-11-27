@@ -11,11 +11,14 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
+# 创建静态NAT
 def create_nat(vid, ip):
     vlanid = str(vid)
+    # 使用VLANID产生内部Object的名字
     inside_obj = "VLAN_" + vlanid + "_HOST"
+    # 使用VLANID产生外部Object的名字
     outside_obj = "outside_" + vlanid
-
+    # 构建NAT的JSON数据
     json_data = {
                 "isPatPool": False,
                 "useInterfaceIPv6": False,
@@ -45,7 +48,8 @@ def create_nat(vid, ip):
                 "isInterfacePAT": False
                 }
     url = 'https://' + ip + '/api/nat/auto'  # 请求的URL
-    requests.post(url, headers=my_headers, auth=auth_header, json=json_data, verify=False)  # 使用POST发起请求,并且使用认证头部
+    # 使用POST发起请求,添加头部,认证信息和JSON数据
+    requests.post(url, headers=my_headers, auth=auth_header, json=json_data, verify=False)
 
 
 if __name__ == "__main__":

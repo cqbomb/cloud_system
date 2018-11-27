@@ -11,11 +11,14 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
+# 创建内部Object
 def create_in_obj(vid, ip):
     vlanid = str(vid)
+    # 使用VLANID产生内部地址
     ipaddress = "172.16." + vlanid + ".100"
+    # 使用VLANID产生内部Object的名字
     object_name = "VLAN_" + vlanid + "_HOST"
-
+    # 构建JSON数据
     json_data = {
                  "host": {
                           "kind": "IPv4Address",
@@ -25,15 +28,18 @@ def create_in_obj(vid, ip):
                  "name": object_name
                  }
     url = 'https://' + ip + '/api/objects/networkobjects'  # 请求的URL
-    requests.post(url, headers=my_headers, auth=auth_header, json=json_data, verify=False)  # 使用POST发起请求,并且使用认证头部
+    # 使用POST发起请求,添加头部,认证信息和JSON数据
+    requests.post(url, headers=my_headers, auth=auth_header, json=json_data, verify=False)
 
 
+# 创建外部Object
 def create_out_obj(vid, ip):
     vlanid = str(vid)
-
+    # 使用VLANID产生外部地址
     outside_ip = "202.100.1." + vlanid
+    # 使用VLANID产生外部Object的名字
     object_name = "outside_" + vlanid
-
+    # 构建JSON数据
     json_data = {
                  "host": {
                           "kind": "IPv4Address",
@@ -43,6 +49,7 @@ def create_out_obj(vid, ip):
                  "name": object_name
                  }
     url = 'https://' + ip + '/api/objects/networkobjects'  # 请求的URL
+    # 使用POST发起请求,添加头部,认证信息和JSON数据
     requests.post(url, headers=my_headers, auth=auth_header, json=json_data, verify=False)  # 使用POST发起请求,并且使用认证头部
 
 

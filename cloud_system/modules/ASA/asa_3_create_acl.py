@@ -12,9 +12,11 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
+# 配置ACL放行Any访问内部服务器的TCP和ICMP流量
 def create_acl(vid, ip):
+    # 内部真实服务器的Object
     object_name = "VLAN_" + str(vid) + "_HOST"
-
+    # 构建ACL的JSON数据,放行ICMP
     json_data_icmp = {
                 "sourceAddress": {
                 "kind": "AnyIPAddress",
@@ -33,10 +35,12 @@ def create_acl(vid, ip):
                 }
 
     url = 'https://' + ip + '/api/access/in/Outside/rules'  # 请求的URL
-    requests.post(url, headers=my_headers, auth=auth_header, json=json_data_icmp, verify=False)  # 使用POST发起请求,并且使用认证头部
+    # 使用POST发起请求,添加头部,认证信息和JSON数据
+    requests.post(url, headers=my_headers, auth=auth_header, json=json_data_icmp, verify=False)
 
+    # 等待两秒后继续添加ACL
     time.sleep(2)
-
+    # 构建ACL的JSON数据,放行TCP
     json_data_tcp = {
                 "sourceAddress": {
                 "kind": "AnyIPAddress",
@@ -53,7 +57,7 @@ def create_acl(vid, ip):
                 "permit": True,
                 "active": True
                 }
-
+    # 使用POST发起请求,添加头部,认证信息和JSON数据
     requests.post(url, headers=my_headers, auth=auth_header, json=json_data_tcp, verify=False) # 使用POST发起请求,并且使用认证头部
 
 
