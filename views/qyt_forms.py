@@ -21,14 +21,17 @@ from django.contrib.auth.decorators import login_required
 pool = ThreadPool(processes=5)
 
 
+# 订阅虚拟机页面,访问此页面需要认证
 @login_required()
 def subscribevm(request):
     if request.method == 'POST':
         form = VmForm(request.POST)
         # 如果请求为POST,并且Form校验通过,把新添加的虚拟机信息写入数据库
         if form.is_valid():
+            # 获取登录用户名
             owner = request.session.get('username')
 
+            # 随机产生VLANID,不要与已有的vmid和netid冲突
             while True:
                 vlanid = randint(10, 99)
                 vmid_list = get_vm_id()
@@ -39,8 +42,10 @@ def subscribevm(request):
                     continue
                 break
 
+            # 由于消耗时间过长,所以使用多线程技术实现自动化
             pool.apply_async(qyt_cloud_all_auto, args=(int(request.POST.get('cpu_cores')), int(request.POST.get('mem_G')), vlanid))
             # qyt_cloud_all_auto(int(request.POST.get('cpu_cores')), int(request.POST.get('mem_G')), vlanid)
+            # 把产生的新虚拟机写入数据库
             s1 = Vmdb(vm_name='CentOS_' + str(vlanid),
                       vm_global_ip="202.100.1." + str(vlanid),
                       vm_owner=owner,
@@ -62,13 +67,15 @@ def subscribevm(request):
         return render(request, 'subscribevm.html', {'form': form})
 
 
+# 展示客户虚拟机的页面,访问此页面需要认证
 @login_required()
 def myvms(request):
+    # 获取登录用户名
     owner = request.session.get('username')
-    if owner == 'admin':
+    if owner == 'admin':  # 如果是管理员可以访问所有客户的虚拟机
         # 查询整个数据库的信息 object.all()
         result = Vmdb.objects.all()
-    else:
+    else:  # 其他客户,只能访问自己创建和拥有的虚拟机
         result = Vmdb.objects.filter(vm_owner=owner)
     # 最终得到虚拟机清单vms_list,清单内部是每一个虚拟机信息的字典
     vms_list = []
@@ -91,4 +98,5 @@ def myvms(request):
         vms_dict['status'] = x.vm_status
         vms_dict['webconsole_url'] = x.vm_webconsole_url
         vms_list.append(vms_dict)
+    # 返回客户虚拟机页面myvms.html
     return render(request, 'myvms.html', {'vms_list': vms_list})

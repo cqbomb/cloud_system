@@ -12,13 +12,17 @@ from cloud_system.modules.Cloud_AUTO.Recovery_Factory_Default import recovery
 from qytcloud.models import Vmdb
 
 
+# 恢复试验台页面,访问此页面需要认证
 @login_required()
 def recovery_cloud(request):
+    # 如果客户使用POST访问
     if request.method == 'POST':
+        # 删除所有虚拟机和端口组
         recovery(vcip)
+        # 删除Vmdb数据库内的所有虚拟机
         Vmdb.objects.all().delete()
         return render(request, 'recovery.html')
-    else:
+    else:  # 如果使用GET访问,给客户展示recovery.html
         return render(request, 'recovery.html')
 
 

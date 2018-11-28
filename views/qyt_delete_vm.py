@@ -13,9 +13,12 @@ from qytcloud.models import Vmdb
 from django.contrib.auth.decorators import login_required
 
 
+# 删除虚拟机,访问此页面需要认证
 @login_required()
 def delete_vm(request, vmname):
+    # 删除虚拟机(关机再删除)
     delete_vm_by_name(vcip, vmname)
+    # 清空Vmdb数据库
     Vmdb.objects.get(vm_name=vmname).delete()
     return HttpResponseRedirect('/myvms/')
 

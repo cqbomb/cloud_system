@@ -9,6 +9,7 @@
 from django.shortcuts import render
 
 
+# 提供主页index.html
 def index(request):
     return render(request, 'index.html')
 

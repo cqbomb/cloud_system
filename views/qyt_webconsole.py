@@ -10,10 +10,11 @@ from django.shortcuts import render
 from cloud_system.modules.vSphere.vsphere_9_get_token import get_token_url
 
 
+# 访问特定虚拟机的WEBCONSOLE
 def webconsole(request, name):
-    try:
+    try:  # 如果虚拟机已经准备好,嵌入webconsole的url链接到vsphere_web_console.html页面
         token_result = get_token_url(name)
         return render(request, 'vsphere_web_console.html', {'text': token_result})
-    except:
+    except:  # 如果虚拟机没有准备好,显示等待几分钟的页面wait_1_min.html
         return render(request, "wait_1_min.html")
 

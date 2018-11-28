@@ -13,13 +13,19 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
 
 
+# 关闭特定虚拟机电源,访问此页面需要认证
 @login_required()
 def poweroff(request, vmname):
+    # 关闭特定虚拟机电源
     poweroff_vm_by_name(vcip, vmname)
+    # 执行成功后,重定向到我的虚拟机页面
     return HttpResponseRedirect('/myvms/')
 
 
+# 打开特定虚拟机电源,访问此页面需要认证
 @login_required()
 def poweron(request, vmname):
+    # 打开特定虚拟机电源
     poweron_vm_by_name(vcip, vmname)
+    # 执行成功后,重定向到我的虚拟机页面
     return HttpResponseRedirect('/myvms/')
