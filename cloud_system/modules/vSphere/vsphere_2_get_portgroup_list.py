@@ -18,8 +18,11 @@ def get_network_id():
     vlanid = []
 
     for x in result['value']:
-        if 'VLAN' in x['name']:
-            vlanid.append(int(x['name'].replace('VLAN', '')))
+        try:
+            if 'VLAN' in x['name']:
+                vlanid.append(int(x['name'].replace('VLAN', '')))
+        except Exception:
+            pass
 
     return vlanid
 
