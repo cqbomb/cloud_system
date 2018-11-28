@@ -13,8 +13,8 @@
 
 [课程视频简介](http://t.cn/ELZdCzB?m=4309964312952007&u=1390280355)
 
-![首页](https://gitee.com/qytang/cloud_system/blob/master/static/images/cloud1.png)  
-![重置](https://gitee.com/qytang/cloud_system/blob/master/static/images/cloud2.png)  
-![订阅](https://gitee.com/qytang/cloud_system/blob/master/static/images/cloud3.png)  
-![查看](https://gitee.com/qytang/cloud_system/blob/master/static/images/cloud4.png) 
-![控制](https://gitee.com/qytang/cloud_system/blob/master/static/images/cloud4.png)   
+![首页](https://gitee.com/qytang/cloud_system/raw/master/static/images/cloud1.png)  
+![重置](https://gitee.com/qytang/cloud_system/raw/master/static/images/cloud2.png)  
+![订阅](https://gitee.com/qytang/cloud_system/raw/master/static/images/cloud3.png)  
+![查看](https://gitee.com/qytang/cloud_system/raw/master/static/images/cloud4.png) 
+![控制](https://gitee.com/qytang/cloud_system/raw/master/static/images/cloud5.png)   
