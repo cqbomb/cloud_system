@@ -51,8 +51,10 @@ def create_acl(vid, ip):
                 "objectId": object_name
                 },
                 "destinationService": {
-                "kind": "NetworkProtocol",
-                "value": "tcp"
+                # "kind": "NetworkProtocol",  # 放行TCP
+                # "value": "tcp",  # 放行TCP
+                "kind": "TcpUdpService",  # 放行HTTP TCP/80
+                "value": "tcp/80",  # 放行HTTP TCP/80
                 },
                 "permit": True,
                 "active": True
