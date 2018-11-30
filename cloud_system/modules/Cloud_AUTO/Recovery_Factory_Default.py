@@ -15,9 +15,12 @@ import time
 # 删除所有的虚拟机与端口组
 def recovery(vcip):
     # 删除所有的虚拟机,先关机再删除
-    for vm in get_vms(vcip):
-        poweroff_vm(vcip, vm['vm'])
-        delete_vm(vcip, vm['vm'])
+    try:
+        for vm in get_vms(vcip):
+            poweroff_vm(vcip, vm['vm'])
+            delete_vm(vcip, vm['vm'])
+    except Exception:
+        pass
     # 删除所有的Port-Group
     for net in get_networks(vcip)['value']:
         remove_pg(net['name'])
